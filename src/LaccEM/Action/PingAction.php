@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action;
+namespace LaccEM\Action;
 
 use Zend\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

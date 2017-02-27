@@ -1,6 +1,6 @@
 <?php
 
-namespace AppTest\Action;
+namespace LaccEMTest\Action;
 
 use App\Action\HomePageAction;
 use Zend\Diactoros\Response;

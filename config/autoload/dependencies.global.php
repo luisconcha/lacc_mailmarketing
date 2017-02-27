@@ -16,9 +16,12 @@ return [
             Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
-        'factories' => [
-            Application::class => ApplicationFactory::class,
-            Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
+        'factories'  => [
+          Application::class      => ApplicationFactory::class,
+          Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
+        ],
+        'aliases'    => [
+          'configuration' => 'config', //Doctrine needs a service called Configuration
         ],
     ],
 ];

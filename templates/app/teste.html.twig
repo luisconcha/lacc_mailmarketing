@@ -3,5 +3,62 @@
 {% block title %}Teste{% endblock %}
 
 {% block content %}
+    <h3>Test page</h3>
+
+    <h3>Categories cadastradas </h3>
+    {% for category in categories %}
+         {{ category.name }}<br />
+    {% endfor %}
+    <hr>
+
     {{ data }}
+    {% set dois = 4521 %}
+    <h4>Operações</h4>
+    {{ 2 * 2 }} <br/>
+    {{ 2 + 2 }} <br/>
+    {{ 2 - 2 }} <br/>
+    {{ 2 / 2 }} <br/>
+    {{ 3 % 2 }} <br/>
+    {{ "Luis" ~ " Alberto " ~ dois ~ " " ~ data }} <br/>
+
+    <h4>Arrays</h4>
+    {% set array_1 = [1,2,3,4,5,6] %}
+    {% set array_2 = {'chave1' : "valor1",'chave2' : "valor2",'chave3' : "valor3"} %}
+    {{ array_2.chave2 }}
+
+    <h4>Laço de repetição</h4>
+    {% for value in array_1 %}
+        {{ loop.index }} => {{ value }}<br/>
+    {% endfor %}<br/>
+
+    {% for key,value in array_2 %}
+        {{ key }} => {{ value }}<br/>
+    {% endfor %}<br/>
+
+    {% for i in 0..3 %}
+        {{ i }} -
+    {% endfor %}<br/>
+
+    {% for value in 'a'..'z' %}
+        {{ loop.index }} - {{ value }}<br/>
+    {% endfor %}<br/>
+
+    <h4>Filtros</h4>
+    {{ "Luis Alberto" | upper }}<br/>
+    {% set black = "<b>teste</b>" %}<br/>
+    {{ black | raw }}<br/>
+    {{ "<b>Meu teste</b>" | escape }} <br/>
+    {{ " Meu teste   " }} <br/>
+    {{ " Meu teste   " | trim }} <br/>
+    {{ " teste   " | trim('e') | upper }} <br/>
+    <input type="text" value=" {{ " teste   " | trim | upper }}"> <br/>
+    {{ "now" | date('d/m/Y') }} <br/>
+    {{ "now" | date('m-d-Y') }} <br/>
+
+    <h4>Operações lógicas</h4>
+    {% if 1 < 5 and 4 < 5 %}
+        <h6>1 < 5</h6>
+    {% else %}
+        <h6>Não é menor</h6>
+    {% endif %}
 {% endblock %}
