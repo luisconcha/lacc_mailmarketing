@@ -13,6 +13,8 @@ namespace LaccEM\Action;
 
 use Doctrine\ORM\EntityManager;
 use LaccEM\Entity\Category;
+use LaccEM\Entity\Client;
+use LaccEM\Entity\Address;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -40,8 +42,34 @@ class TestePageAction
         $this->manager->persist( $category );
         $this->manager->flush();
         $categories = $this->manager->getRepository( Category::class )->findAll();
-
+        //
+        $client = new Client();
+        $client->setName( 'Luis Alberto Concha' )
+          ->setCpf( '12345678909' )
+          ->setEmail( 'luvett11222@gmail.com' );
+        $this->manager->persist( $client );
+        $this->manager->flush();
+        //
+        if ( $client->getId() ) {
+            $address = new Address();
+            $address->setCep( '45124578' )
+              ->setAddress( 'Av Sem número 13' )
+              ->setCity( 'Outra cidade' )
+              ->setState( 'Outro Estado' )
+              ->setClient( $client );
+            $this->manager->persist( $address );
+            $this->manager->flush();
+        }
+        //
+        $clients = $this->manager->getRepository( Client::class )->findAll();
+        $address = $this->manager->getRepository( Address::class )->findAll();
+        
         return new HtmlResponse( $this->template->render( "app::teste",
-          [ 'data' => 'Minha primeira aplicação', 'categories' => $categories ] ) );
+          [
+            'categories'  => $categories,
+            'clients'     => $clients,
+            'addressList' => $address,
+          ]
+        ) );
     }
 }
